@@ -96,7 +96,7 @@ function result(){
   const low=ps.reduce((m,x)=>x.s<m.s?x:m,ps[0]);
   $("#pct").textContent=pct+"%";$("#band").textContent=band[2];$("#bandline").textContent=band[3];
   $("#rows").innerHTML=ps.map(x=>`<div class="row${x===low?" low":""}"><span>${x.p.name}</span><span class="t"><i style="width:${Math.round(x.s/3*100)}%"></i></span><span>${x.s}/3</span></div>`).join("");
-  $("#next").innerHTML=`<div class="kick"><b></b>Start here: ${low.p.name}</div><p>Your lowest pillar is ${low.p.name.toLowerCase()}. That's where an agent pays you back first.</p><a class="btn" href="${low.p.next[1]}&utm_campaign=${low.p.key}">See ${low.p.next[0]}</a> <a class="btn ghost" href="https://ekaistone.com/seven-star/build${D.U}&utm_campaign=full">Turn the whole business AI-first</a>`;
+  $("#next").innerHTML=`<div class="kick"><b></b>Start here: ${low.p.name}</div><p>Your lowest pillar is ${low.p.name}. That's where an agent pays you back first.</p><a class="btn" href="${low.p.next[1]}&utm_campaign=${low.p.key}">See ${low.p.next[0]}</a> <a class="btn ghost" href="https://ekaistone.com/seven-star/build${D.U}&utm_campaign=full">Turn the whole business AI-first</a>`;
   $("#result").style.display="block";$("#result").scrollIntoView({behavior:"smooth"});
   $("#copy").onclick=()=>{const t=`My AI-First Company Score: ${pct}% (${band[2]}). Lowest pillar: ${low.p.name}. Take it free: https://jupiter-revenue-systems.github.io/ai-first-company-scorecard/`;navigator.clipboard&&navigator.clipboard.writeText(t).then(()=>{$("#copy").textContent="Copied"})};
 }
