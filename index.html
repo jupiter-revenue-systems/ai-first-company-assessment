@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI-First Company Scorecard</title>
+<meta name="description" content="Score your business on 7 pillars in about a minute and see how AI-first it really is. Free, from Jupiter Revenue Systems.">
+<meta property="og:title" content="The AI-First Company Scorecard">
+<meta property="og:description" content="7 questions, 7 pillars, 1 minute. How AI-first is your business?">
+<meta property="og:image" content="https://raw.githubusercontent.com/jupiter-revenue-systems/ai-first-company-scorecard/main/assets/social-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#04070D;--ink:#E8ECF1;--mute:#8E97A4;--soft:#C5CCD6;--lime:#A4ED07;--blue:#01ADEB;--sky:#A6DAFF;--orange:#E2732E;--line:rgba(216,231,242,.14);--glass:rgba(255,255,255,.045)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg)}
+body{font-family:Geist,system-ui,sans-serif;color:var(--ink);background:radial-gradient(900px 600px at 90% -10%,rgba(1,173,235,.16),transparent 60%),radial-gradient(800px 600px at -10% 110%,rgba(226,115,46,.12),transparent 60%),var(--bg);background-attachment:fixed;min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.5}
+.wrap{max-width:760px;margin:0 auto;padding:48px 16px 80px}
+.kick{font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);display:flex;align-items:center;gap:10px}
+.kick b{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime)}
+h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(40px,9vw,68px);line-height:1;letter-spacing:-.015em;margin:16px 0 14px}
+h1 em{color:var(--lime);font-style:italic}
+.lead{color:var(--soft);font-size:18px;max-width:56ch}
+.scale{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 8px}
+.scale span{font-family:"Geist Mono",monospace;font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft)}
+.scale span i{font-style:normal;color:var(--lime);margin-right:6px}
+.card{background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:22px;padding:22px;margin-top:18px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.card h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:30px;line-height:1.1;display:flex;align-items:baseline;gap:12px}
+.card h2 small{font-family:"Geist Mono",monospace;font-size:12px;color:var(--mute);letter-spacing:.08em}
+.card .sub{color:var(--mute);font-size:14px;margin-top:2px}
+.q{padding:16px 0;border-top:1px solid var(--line)}
+.q:first-of-type{margin-top:14px}
+.q p{font-size:16px;color:var(--ink)}
+.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+.opts button{font:500 13px Geist,system-ui,sans-serif;color:var(--soft);background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:10px 4px;cursor:pointer;min-height:44px;transition:.15s}
+.opts button:hover{border-color:rgba(166,218,255,.4)}
+.opts button[aria-pressed=true]{background:rgba(164,237,7,.12);border-color:var(--lime);color:var(--ink)}
+.opts button b{display:block;font-family:"Geist Mono",monospace;font-size:15px;color:var(--ink)}
+.bar{position:sticky;bottom:12px;margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(4,7,13,.86);border:1px solid var(--line);border-radius:18px;padding:12px 14px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.bar .prog{font-family:"Geist Mono",monospace;font-size:13px;color:var(--mute)}
+.btn{font:600 15px Geist,system-ui,sans-serif;color:#04070D;background:var(--lime);border:0;border-radius:12px;padding:12px 18px;cursor:pointer;text-decoration:none;display:inline-block;min-height:44px}
+.btn[disabled]{opacity:.35;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+#result{display:none}
+.score{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(72px,18vw,120px);line-height:1;color:var(--lime)}
+.band{font-family:"Instrument Serif",Georgia,serif;font-size:34px;margin-top:6px}
+.rows{margin-top:18px}
+.row{display:grid;grid-template-columns:96px 1fr 44px;gap:10px;align-items:center;padding:8px 0;font-size:14px}
+.row .t{height:10px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden}
+.row .t i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--lime))}
+.row.low .t i{background:linear-gradient(90deg,var(--orange),#F2A15F)}
+.row span:last-child{font-family:"Geist Mono",monospace;text-align:right;color:var(--soft)}
+.next{margin-top:20px;padding:18px;border-radius:16px;border:1px solid rgba(226,115,46,.4);background:rgba(226,115,46,.07)}
+.next p{color:var(--soft);margin:6px 0 14px}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+footer{margin-top:48px;color:var(--mute);font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.04em}
+footer a{color:var(--sky)}
+@media (max-width:480px){.opts button{font-size:11px;padding:8px 2px}.row{grid-template-columns:80px 1fr 40px}.card{padding:18px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="kick"><b></b>Jupiter Revenue Systems · free tool</div>
+  <h1>How <em>AI-first</em> is your company?</h1>
+  <p class="lead">7 questions, one per pillar. About a minute. Answer honestly, then see where an AI agent pays you back first.</p>
+  <div class="scale" id="scale"></div>
+  <div id="quiz"></div>
+  <div class="bar"><span class="prog" id="prog">0 of 7 answered</span><button class="btn" id="go" disabled>See my score</button></div>
+  <section id="result" class="card" aria-live="polite">
+    <div class="kick"><b></b>Your score</div>
+    <div class="score" id="pct"></div>
+    <div class="band" id="band"></div>
+    <p class="lead" id="bandline"></p>
+    <div class="rows" id="rows"></div>
+    <div class="next" id="next"></div>
+    <div class="acts"><button class="btn ghost" id="copy">Copy my score</button><button class="btn ghost" id="reset">Start over</button></div>
+  </section>
+  <footer>Built by <a href="https://ekaistone.com/?utm_source=github&utm_medium=scorecard">Ekai Stone</a> · Jupiter Revenue Systems · <a href="https://github.com/jupiter-revenue-systems/ai-first-company-scorecard">Star it on GitHub</a></footer>
+</main>
+<script>
+const D={"P":[{"key":"strategy","name":"Strategy","sub":"Processes an agent can run","items":["Your processes are written down clearly enough that an AI agent could run them."],"next":["Strategy Session ($750)","https://ekaistone.com/strategy-session?utm_source=github&utm_medium=scorecard"]},{"key":"attract","name":"Attract","sub":"Content in your voice","items":["Your content gets drafted in your voice by an agent, and you approve it instead of writing it."],"next":["The HOPS Team ($37)","https://ekaistone.com/hops?utm_source=github&utm_medium=scorecard"]},{"key":"convert","name":"Convert","sub":"Leads captured and followed up","items":["Every lead from your site, forms and free tools lands in your CRM and gets followed up on its own."],"next":["Seven Star Build","https://ekaistone.com/seven-star/build?utm_source=github&utm_medium=scorecard"]},{"key":"close","name":"Close","sub":"Replies and booking","items":["Every DM and form lead gets a reply within minutes, day or night, and calls get booked without you."],"next":["Instagram Sales Agent","https://ekaistone.com/ig-sales-agent?utm_source=github&utm_medium=scorecard"]},{"key":"deliver","name":"Deliver","sub":"Access and fulfillment","items":["Buyers get what they paid for within minutes, without you touching it."],"next":["Seven Star Build","https://ekaistone.com/seven-star/build?utm_source=github&utm_medium=scorecard"]},{"key":"support","name":"Support","sub":"Answers around the clock","items":["Common questions get answered by an agent trained on your own docs, around the clock."],"next":["The HOPS Team ($37)","https://ekaistone.com/hops?utm_source=github&utm_medium=scorecard"]},{"key":"signal","name":"Signal","sub":"Tracking you can trust","items":["You can tell which ad brought in each sale, and your ad platform counts the same sales your CRM does."],"next":["Seven Star Build","https://ekaistone.com/seven-star/build?utm_source=github&utm_medium=scorecard"]}],"SCALE":[["0","Not in place"],["1","Manual: a person does it"],["2","Partly automated"],["3","AI-run, a person checks"]],"BANDS":[[0,34,"Manual company","You are the system. Every sale and every delivery runs through you."],[35,59,"Tool-stacked","Lots of apps, few agents. The tools still need you to run them."],[60,84,"AI-assisted","Agents do real work in parts of the business. The gaps still cost you."],[85,100,"AI-first company","Agents run the work and people check it. Now it's about scale."]],"U":"?utm_source=github&utm_medium=scorecard"};
+const ans={};let K="aifirst-scorecard-v1";
+try{Object.assign(ans,JSON.parse(localStorage.getItem(K)||"{}"))}catch(e){}
+const $=s=>document.querySelector(s);
+$("#scale").innerHTML=D.SCALE.map(([n,t])=>`<span><i>${n}</i>${t}</span>`).join("");
+const short=["Not yet","Manual","Partly","AI-run"];
+$("#quiz").innerHTML=D.P.map((p,i)=>`<section class="card"><h2>${p.name}<small>0${i+1} / 07</small></h2><div class="sub">${p.sub}</div>${p.items.map((s,j)=>`<div class="q"><p>${s}</p><div class="opts" role="group" aria-label="${p.name} ${j+1}">${short.map((t,v)=>`<button type="button" data-k="${p.key}.${j}" data-v="${v}" aria-pressed="false"><b>${v}</b>${t}</button>`).join("")}</div></div>`).join("")}</section>`).join("");
+const total=D.P.reduce((a,p)=>a+p.items.length,0);
+function paint(){document.querySelectorAll(".opts button").forEach(b=>b.setAttribute("aria-pressed",String(ans[b.dataset.k]===+b.dataset.v)));const n=Object.keys(ans).length;$("#prog").textContent=`${n} of ${total} answered`;$("#go").disabled=n<total}
+document.addEventListener("click",e=>{const b=e.target.closest(".opts button");if(!b)return;ans[b.dataset.k]=+b.dataset.v;try{localStorage.setItem(K,JSON.stringify(ans))}catch(e){}paint()});
+function result(){
+  const ps=D.P.map(p=>({p,s:p.items.reduce((a,_,j)=>a+(ans[p.key+"."+j]||0),0)}));
+  const sum=ps.reduce((a,x)=>a+x.s,0),pct=Math.round(sum/(total*3)*100);
+  const band=D.BANDS.find(([a,b])=>pct>=a&&pct<=b)||D.BANDS[0];
+  const low=ps.reduce((m,x)=>x.s<m.s?x:m,ps[0]);
+  $("#pct").textContent=pct+"%";$("#band").textContent=band[2];$("#bandline").textContent=band[3];
+  $("#rows").innerHTML=ps.map(x=>`<div class="row${x===low?" low":""}"><span>${x.p.name}</span><span class="t"><i style="width:${Math.round(x.s/3*100)}%"></i></span><span>${x.s}/3</span></div>`).join("");
+  $("#next").innerHTML=`<div class="kick"><b></b>Start here: ${low.p.name}</div><p>Your lowest pillar is ${low.p.name.toLowerCase()}. That's where an agent pays you back first.</p><a class="btn" href="${low.p.next[1]}&utm_campaign=${low.p.key}">See ${low.p.next[0]}</a> <a class="btn ghost" href="https://ekaistone.com/seven-star/build${D.U}&utm_campaign=full">Turn the whole business AI-first</a>`;
+  $("#result").style.display="block";$("#result").scrollIntoView({behavior:"smooth"});
+  $("#copy").onclick=()=>{const t=`My AI-First Company Score: ${pct}% (${band[2]}). Lowest pillar: ${low.p.name}. Take it free: https://jupiter-revenue-systems.github.io/ai-first-company-scorecard/`;navigator.clipboard&&navigator.clipboard.writeText(t).then(()=>{$("#copy").textContent="Copied"})};
+}
+$("#go").onclick=result;
+$("#reset").onclick=()=>{for(const k in ans)delete ans[k];try{localStorage.removeItem(K)}catch(e){}$("#result").style.display="none";paint();window.scrollTo({top:0,behavior:"smooth"})};
+paint();
+</script>
+</body>
+</html>
